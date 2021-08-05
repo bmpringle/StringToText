@@ -1,0 +1,18 @@
+[submodule "freetype"]
+	path = freetype
+	url = https://github.com/freetype/freetype
+[submodule "libpng"]
+	path = libpng
+	url = https://github.com/glennrp/libpng
+[submodule "zlib"]
+	path = zlib
+	url = https://github.com/madler/zlib
+[submodule "bzip2"]
+	path = bzip2
+	url = https://github.com/opencor/bzip2
+[submodule "brotli"]
+	path = brotli
+	url = https://github.com/google/brotli
+[submodule "stb"]
+	path = stb
+	url = https://github.com/nothings/stb
