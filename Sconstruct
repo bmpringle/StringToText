@@ -11,7 +11,7 @@ TEST = ARGUMENTS.get("TEST", 0)
 env = Environment()
 
 CXX = "clang++"
-CCFLAGS = "-I freetype/include -I ../"
+CCFLAGS = "-I freetype/include -I ./include -I ./"
 LINK = "{}".format(CXX)
 
 STATIC_LIBS = Glob(os.sep.join(["lib", "*.a"]))
@@ -20,6 +20,8 @@ for STATIC_LIB in STATIC_LIBS:
     LIB_NAME = str(STATIC_LIB)[3:].strip('.a')
 
     execCmd('mkdir -p cd obj/{}; cd obj/{}; ar x ../../{}'.format(LIB_NAME, LIB_NAME, STATIC_LIB))
+
+VariantDir("obj", "src", duplicate=0)
 
 env.StaticLibrary(target=os.sep.join(["bin", "libStringToText.a"]), source=[Glob(os.sep.join(["src", "StringToText", "*.cpp"])), Glob(os.sep.join(["obj", "*", "*.o"]))], CXX=CXX, CCFLAGS=CCFLAGS)
 

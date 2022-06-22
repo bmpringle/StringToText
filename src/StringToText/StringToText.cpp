@@ -1,4 +1,4 @@
-#include "StringToText.h"
+#include "StringToText/StringToText.h"
 
 void StringToTextConverter::resizeBuffer(unsigned int newStride, int unsigned newRows) {
     std::vector<unsigned char> newcharbitmap;
