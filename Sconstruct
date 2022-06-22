@@ -1,0 +1,26 @@
+#! /usr/bin/env python3
+import os
+import subprocess
+import sys
+from executeCommand import execCmd
+from platform import system
+
+PIC = ARGUMENTS.get("PIC", 0)
+TEST = ARGUMENTS.get("TEST", 0)
+
+env = Environment()
+
+CXX = "clang++"
+CCFLAGS = "-I freetype/include -I ../"
+LINK = "{}".format(CXX)
+
+STATIC_LIBS = Glob(os.sep.join(["lib", "*.a"]))
+
+for STATIC_LIB in STATIC_LIBS:
+    LIB_NAME = str(STATIC_LIB)[3:].strip('.a')
+
+    execCmd('mkdir -p cd obj/{}; cd obj/{}; ar x ../../{}'.format(LIB_NAME, LIB_NAME, STATIC_LIB))
+
+env.StaticLibrary(target=os.sep.join(["bin", "libStringToText.a"]), source=[Glob(os.sep.join(["src", "StringToText", "*.cpp"])), Glob(os.sep.join(["obj", "*", "*.o"]))], CXX=CXX, CCFLAGS=CCFLAGS)
+
+env.Program(target=os.sep.join(["bin", "test"]), source=[Glob(os.sep.join(["src", "*.cpp"])), os.sep.join(["bin", "libStringToText.a"])], CXX=CXX, CCFLAGS=CCFLAGS, LINK=LINK)
