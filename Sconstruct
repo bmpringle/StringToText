@@ -23,6 +23,6 @@ for STATIC_LIB in STATIC_LIBS:
 
 VariantDir("obj", "src", duplicate=0)
 
-env.StaticLibrary(target=os.sep.join(["bin", "libStringToText.a"]), source=[Glob(os.sep.join(["obj", "*", "*.o"]))], CXX=CXX, CCFLAGS=CCFLAGS)
+env.StaticLibrary(target=os.sep.join(["bin", "libStringToText.a"]), source=[Glob(os.sep.join(["obj", "*", "*.o"])), Glob(os.sep.join(["obj", "StringToText/", "*.cpp"]))], CXX=CXX, CCFLAGS=CCFLAGS)
 
 env.Program(target=os.sep.join(["bin", "test"]), source=[Glob(os.sep.join(["obj", "*.cpp"])), os.sep.join(["bin", "libStringToText.a"])], CXX=CXX, CCFLAGS=CCFLAGS, LINK=LINK)
