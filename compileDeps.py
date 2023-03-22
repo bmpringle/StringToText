@@ -31,10 +31,10 @@ output, error = execCmd('cmake . -DCMAKE_OSX_ARCHITECTURES=arm64 -D{}'.format(PI
 output, error = execCmd('make -j8', './zlib')
 output, error = execCmd('mv ./libz.a ../lib/libz.a', './zlib')
 
-output, error = execCmd('echo ${CC}', './zlib')
-
-output, error = execCmd('make -j8 {}'.format('CFLAGS=\"-Wall -Winline -O2 -g -D_FILE_OFFSET_BITS=64 -fPIC\"' if PICON else ''), './bzip2')
-output, error = execCmd('mv ./libbz2.a ../lib/libbz2.a', './bzip2')
+output, error = execCmd('mkdir -p build', 'bzip2-new')
+output, error = execCmd('cmake ../ -DCMAKE_OSX_ARCHITECTURES=arm64 -DENABLE_STATIC_LIB=true -D{} ..'.format(PICSTRING), 'bzip2-new/build')
+output, error = execCmd('cmake --build . --config Release', 'bzip2-new/build')
+output, error = execCmd('mv libbz2_static.a ../../lib/libbz2.a', 'libbz2-new/build')
 
 output, error = execCmd('cmake . -DCMAKE_OSX_ARCHITECTURES=arm64 -D{}'.format(PICSTRING), './brotli')
 output, error = execCmd('make -j8', './brotli')
