@@ -11,7 +11,7 @@ TEST = ARGUMENTS.get("TEST", 0)
 env = Environment()
 
 CXX = "clang++"
-CCFLAGS = "-I freetype/include -I ./include -I ./ {}".format("-fpic" if PIC == 1 else "")
+CCFLAGS = "-arch arm64 -I freetype/include -I ./include -I ./ {}".format("-fpic" if PIC == 1 else "")
 LINK = "{}".format(CXX)
 
 STATIC_LIBS = Glob(os.sep.join(["lib", "*.a"]))
